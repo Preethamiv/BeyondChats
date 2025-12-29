@@ -6,8 +6,12 @@ require("dotenv").config();
 
 const axios = require("axios");
 const puppeteer = require("puppeteer");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-/* -------------------- helpers -------------------- */
+// Gemini setup 
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const decodeDuckDuckGoUrl = (url) => {
@@ -40,13 +44,13 @@ const isValidArticleLink = (url) => {
   }
 };
 
-/* -------------------- Step 1: fetch pending articles -------------------- */
+// Step 1: fetch pending articles 
 const fetchPendingArticles = async () => {
   const res = await axios.get("http://localhost:5000/api/articles");
   return res.data.filter((a) => a.isUpdated === false);
 };
 
-/* -------------------- Step 2: DuckDuckGo search -------------------- */
+// Step 2: DuckDuckGo search 
 const searchDuckDuckGo = async (query) => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
@@ -81,7 +85,7 @@ const searchDuckDuckGo = async (query) => {
   return cleanLinks;
 };
 
-/* -------------------- Step 3: scrape reference articles -------------------- */
+// Step 3: scrape reference articles 
 const scrapeReferenceArticles = async (urls) => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
@@ -121,8 +125,72 @@ const scrapeReferenceArticles = async (urls) => {
   return scraped;
 };
 
+// Step 4: build Gemini prompt 
+const buildGeminiPrompt = (originalContent, referenceArticles) => `
+You are a professional content editor.
 
-/* -------------------- MAIN PIPELINE -------------------- */
+TASK:
+Rewrite and improve the ORIGINAL ARTICLE using insights from the REFERENCE ARTICLES.
+
+RULES:
+- Do NOT copy sentences from references.
+- Do NOT plagiarize.
+- Improve structure, clarity, flow, and depth.
+- Output MUST be valid HTML.
+- Use headings and paragraphs.
+- Add a "References" section at the end with links.
+
+ORIGINAL ARTICLE:
+"""
+${originalContent}
+"""
+
+REFERENCE ARTICLE 1:
+"""
+${referenceArticles[0].content}
+"""
+
+REFERENCE ARTICLE 2:
+"""
+${referenceArticles[1].content}
+"""
+
+OUTPUT:
+- HTML only
+- End with:
+<h3>References</h3>
+<ul>
+  <li><a href="${referenceArticles[0].url}">${referenceArticles[0].url}</a></li>
+  <li><a href="${referenceArticles[1].url}">${referenceArticles[1].url}</a></li>
+</ul>
+`;
+
+// Step 5: Gemini rewrite 
+const rewriteWithGemini = async (prompt) => {
+  try {
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+    
+    // Safety check: remove markdown code blocks if Gemini wraps the HTML
+    return text.replace(/```html|```/g, "").trim();
+  } catch (error) {
+    console.error("❌ Gemini API Call Failed:", error.message);
+    throw error;
+  }
+};
+
+// Step 6: publish updated article 
+const publishUpdatedArticle = async (articleId, html, referenceUrls) => {
+  await axios.put(`http://localhost:5000/api/articles/${articleId}`, {
+    updatedContent: html,
+    references: referenceUrls,
+  });
+
+  console.log("✅ Updated article published");
+};
+
+//MAIN PIPELINE 
 (async () => {
   try {
     const pendingArticles = await fetchPendingArticles();
@@ -148,7 +216,13 @@ const scrapeReferenceArticles = async (urls) => {
 
     const referenceArticles = await scrapeReferenceArticles(referenceUrls);
 
-    
+    const prompt = buildGeminiPrompt(
+      article.originalContent,
+      referenceArticles
+    );
+
+    console.log("\n🤖 Calling Gemini...");
+    const updatedHtml = await rewriteWithGemini(prompt);
 
     await publishUpdatedArticle(
       article._id,
