@@ -14,7 +14,6 @@ const axios = require("axios");
  * continuously running service.
  */
 
-
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const scrapeAndStoreOldestArticles = async () => {
