@@ -6,11 +6,6 @@ require("dotenv").config();
 
 const axios = require("axios");
 const puppeteer = require("puppeteer");
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-
-/* -------------------- Gemini setup (IDENTICAL STYLE to Discord bot) -------------------- */
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 /* -------------------- helpers -------------------- */
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -126,57 +121,6 @@ const scrapeReferenceArticles = async (urls) => {
   return scraped;
 };
 
-/* -------------------- Step 4: build Gemini prompt -------------------- */
-const buildGeminiPrompt = (originalContent, referenceArticles) => `
-You are a professional content editor.
-
-TASK:
-Rewrite and improve the ORIGINAL ARTICLE using insights from the REFERENCE ARTICLES.
-
-RULES:
-- Do NOT copy sentences from references.
-- Do NOT plagiarize.
-- Improve structure, clarity, flow, and depth.
-- Output MUST be valid HTML.
-- Use headings and paragraphs.
-- Add a "References" section at the end with links.
-
-ORIGINAL ARTICLE:
-"""
-${originalContent}
-"""
-
-REFERENCE ARTICLE 1:
-"""
-${referenceArticles[0].content}
-"""
-
-REFERENCE ARTICLE 2:
-"""
-${referenceArticles[1].content}
-"""
-
-OUTPUT:
-- HTML only
-- End with:
-<h3>References</h3>
-<ul>
-  <li><a href="${referenceArticles[0].url}">${referenceArticles[0].url}</a></li>
-  <li><a href="${referenceArticles[1].url}">${referenceArticles[1].url}</a></li>
-</ul>
-`;
-
-
-
-/* -------------------- Step 6: publish updated article -------------------- */
-const publishUpdatedArticle = async (articleId, html, referenceUrls) => {
-  await axios.put(`http://localhost:5000/api/articles/${articleId}`, {
-    updatedContent: html,
-    references: referenceUrls,
-  });
-
-  console.log("✅ Updated article published");
-};
 
 /* -------------------- MAIN PIPELINE -------------------- */
 (async () => {
@@ -204,13 +148,7 @@ const publishUpdatedArticle = async (articleId, html, referenceUrls) => {
 
     const referenceArticles = await scrapeReferenceArticles(referenceUrls);
 
-    const prompt = buildGeminiPrompt(
-      article.originalContent,
-      referenceArticles
-    );
-
-    console.log("\n🤖 Calling Gemini...");
-    const updatedHtml = await rewriteWithGemini(prompt);
+    
 
     await publishUpdatedArticle(
       article._id,
