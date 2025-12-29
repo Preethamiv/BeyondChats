@@ -1,6 +1,20 @@
 const puppeteer = require("puppeteer");
 const axios = require("axios");
 
+/**
+ * Phase 1 – Blog Scraper
+ * ---------------------
+ * This script is responsible for collecting the oldest blog articles
+ * from BeyondChats and storing them in the database.
+ *
+ * The idea is to fetch content that is most likely outdated, so it can
+ * later be improved using an AI pipeline in Phase 2.
+ *
+ * This script is intended to be run once (or occasionally), not as a
+ * continuously running service.
+ */
+
+
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const scrapeAndStoreOldestArticles = async () => {
