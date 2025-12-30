@@ -12,6 +12,13 @@ export default function App() {
 
   return (
     <>
+      {/* Global ambient background */}
+      <div className="page-ambient">
+        <span className="one"></span>
+        <span className="two"></span>
+        <span className="three"></span>
+      </div>
+
       <Hero />
 
       <div className="container">
