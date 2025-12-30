@@ -1,5 +1,14 @@
 /**
- * Phase 2 – AI Article Updater
+ * Phase 2 – AI Article Updater, I wrote a short note for clear understanding.
+ *
+ * This script automates the process of updating existing articles using AI.
+ * It fetches pending articles from the backend, searches DuckDuckGo for
+ * relevant reference articles, scrapes their content, and uses the Gemini API
+ * to rewrite the original article with improved structure, clarity, and depth.
+ *
+ * The updated content is generated in clean HTML format, includes headings,
+ * and ends with a references section linking the sources used. The final
+ * article is then published back to the backend.
  */
 
 require("dotenv").config();
