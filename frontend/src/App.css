@@ -1,0 +1,169 @@
+/* ===== Global ===== */
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, Arial, sans-serif;
+  background-color: #f4f6f9;
+  color: #1f2933;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 32px 20px;
+}
+
+/* ===== Header ===== */
+.page-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.page-header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+/* ===== Article Card ===== */
+.article-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Header Row ===== */
+.article-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.article-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+/* ===== Badge ===== */
+.badge {
+  background: #2563eb;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ===== Meta ===== */
+.meta {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin: 8px 0 16px;
+}
+
+/* ===== Grid ===== */
+.article-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* ===== Panels ===== */
+.article-panel {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.article-panel.updated {
+  background: #eef6ff;
+  border: 1px solid #dbeafe;
+}
+
+/* ===== Labels ===== */
+.label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.label.original {
+  color: #374151;
+}
+
+.label.updated {
+  color: #2563eb;
+}
+
+/* ===== Content ===== */
+.content {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #1f2933;
+  max-height: 360px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+/* ===== References ===== */
+.references {
+  margin-top: 24px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.references h4 {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.references ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.references li {
+  margin-bottom: 6px;
+}
+
+.references a {
+  color: #2563eb;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.references a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Status ===== */
+.status {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-top: 40px;
+}
+
+.status.error {
+  color: #dc2626;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .article-grid {
+    grid-template-columns: 1fr;
+  }
+}
