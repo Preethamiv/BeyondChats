@@ -2,20 +2,25 @@ import { useEffect, useState } from "react";
 import ArticleCard from "./components/ArticleCard";
 import "./App.css";
 
-function App() {
+const API_URL = "http://localhost:5000/api/articles";
+
+export default function App() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/articles")
-      .then((res) => res.json())
+    fetch(API_URL)
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch");
+        return res.json();
+      })
       .then((data) => {
         setArticles(data);
         setLoading(false);
       })
-      .catch((err) => {
-        setError("Failed to fetch articles");
+      .catch(() => {
+        setError("Unable to load articles");
         setLoading(false);
       });
   }, []);
@@ -25,7 +30,13 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>BeyondChats Articles</h1>
+      <header className="page-header">
+        <h1>BeyondChats Content Upgrader</h1>
+        <p>
+          AI-powered system to compare original blog articles with updated
+          versions generated using external references
+        </p>
+      </header>
 
       {articles.map((article) => (
         <ArticleCard key={article._id} article={article} />
@@ -33,5 +44,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

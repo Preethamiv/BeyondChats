@@ -1,20 +1,27 @@
-function ArticleCard({ article }) {
+export default function ArticleCard({ article }) {
   return (
     <div className="article-card">
-      <h2 className="article-title">{article.title}</h2>
+      <div className="article-header">
+        <h2>{article.title}</h2>
+        {article.isUpdated && <span className="badge">AI Updated</span>}
+      </div>
 
-      <div className="article-sections">
-        <div className="article-box">
-          <h3>Original Article</h3>
-          <div className="content-box">
-            {article.originalContent || "No original content"}
+      <p className="meta">
+        Status: {article.isUpdated ? "Updated by AI" : "Original"}
+      </p>
+
+      <div className="article-grid">
+        <div className="article-panel">
+          <h3 className="label original">Original</h3>
+          <div className="content">
+            {article.originalContent || "No original content available"}
           </div>
         </div>
 
-        <div className="article-box updated">
-          <h3>Updated Article (AI)</h3>
+        <div className="article-panel updated">
+          <h3 className="label updated">AI Updated</h3>
           <div
-            className="content-box"
+            className="content"
             dangerouslySetInnerHTML={{
               __html: article.updatedContent || "<p>Not updated yet</p>",
             }}
@@ -22,12 +29,12 @@ function ArticleCard({ article }) {
         </div>
       </div>
 
-      {article.references && article.references.length > 0 && (
+      {article.references?.length > 0 && (
         <div className="references">
           <h4>References</h4>
           <ul>
-            {article.references.map((ref, index) => (
-              <li key={index}>
+            {article.references.map((ref, idx) => (
+              <li key={idx}>
                 <a href={ref} target="_blank" rel="noreferrer">
                   {ref}
                 </a>
@@ -39,5 +46,3 @@ function ArticleCard({ article }) {
     </div>
   );
 }
-
-export default ArticleCard;
