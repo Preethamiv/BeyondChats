@@ -1,124 +1,144 @@
-# BeyondChats Blog Intelligence Platform
+# 🧠 BeyondChats – AI-Powered Blog Intelligence System
 
-This project is a full-stack system built as part of the BeyondChats technical assignment.  
-The goal of the project is to **identify outdated blog content, enhance it using AI by
-learning from top-ranking articles, and present both original and improved versions
-through a clean, user-friendly interface**.
+This project is an end-to-end system built as part of the **BeyondChats technical assignment**.  
+It focuses on **scraping, improving, and presenting blog content using AI-driven competitive analysis**.
 
-The system is implemented in three phases: scraping, AI-based enhancement, and frontend visualization.
+The goal of this project is not just automation, but to demonstrate how AI can be used **responsibly and practically** to improve existing content rather than replace it.
 
 ---
 
-## 🧠 Problem Statement
+## 🚀 Project Overview
 
-Blogs often become outdated over time, both in terms of content quality and SEO performance.
-Manually revisiting and improving older articles is time-consuming and inconsistent.
+Over time, blog articles tend to lose relevance due to:
+- outdated structure
+- weaker SEO practices
+- shallow or uncompetitive content
 
-This project demonstrates how:
-- Older blog posts can be programmatically identified
-- High-ranking reference articles can be analyzed
-- AI can be used to rewrite and improve existing content
-- The improvements can be clearly presented and compared
+This project demonstrates how AI can be used to **revive and enhance existing blog content** by learning from better-performing articles on the web.
 
----
-
-## 🏗️ Project Architecture
-
-BeyondChats/
-│
-├── backend/ # Node.js + Express + MongoDB (APIs & Scraper)
-│
-├── ai-updater/ # AI pipeline for content enhancement
-│
-└── frontend/ # React.js UI for viewing & comparing articles
-
+### What this system does
+- Scrapes the **oldest blogs** from BeyondChats
+- Stores them in a database
+- Uses AI to enhance content using competitive references
+- Displays original and updated versions in a clean, professional UI
+- Allows **side-by-side comparison** for transparency
 
 ---
 
-## ⚙️ Tech Stack
+## 🧩 Architecture Overview
+
+![Architecture Diagram](assets/architecture.png)
+
+## 🛠️ Tech Stack
 
 ### Backend
-- Node.js
-- Express.js
-- MongoDB (Mongoose)
-- Puppeteer (web scraping)
+- **Node.js**
+- **Express**
+- **MongoDB + Mongoose**
+- **Puppeteer**
+- **Axios**
+- **CORS**
 
-### AI Pipeline
-- Node.js
-- Puppeteer
-- Google Gemini API (Flash / 2.5 Flash)
+### AI & Automation
+- **Google Gemini (Flash 2.5)**
+- **DuckDuckGo search scraping**
+- **Competitive content analysis**
 
 ### Frontend
-- React.js (Vite)
-- CSS (custom styling)
-- Framer Motion (subtle animations)
+- **React (Vite)**
+- **Modern CSS (Grid, animations, modals)**
+- **Responsive UI**
+- **Z-axis modal overlays**
+- **Side-by-side comparison views**
 
 ---
 
-## 🔹 Phase 1: Blog Scraping & Storage
-
-**Objective:**  
-Fetch the *oldest* blog articles from the BeyondChats blog and store them in a database.
-
-**What was done:**
-- Used Puppeteer to navigate to the last page of the BeyondChats blogs
-- Extracted the 5 oldest articles
-- Scraped the full HTML content of each article
-- Stored article data (title, slug, original content) in MongoDB
-- Built complete CRUD APIs for articles
-
-**Why this matters:**  
-Older articles are more likely to be outdated and benefit the most from AI-based improvements.
+## 📌 Phase-wise Breakdown
 
 ---
 
-## 🔹 Phase 2: AI-Based Article Enhancement
+### ✅ Phase 1 – Blog Scraping & CRUD APIs
 
-**Objective:**  
-Improve original blog articles by learning from high-ranking reference articles.
+**Objective**  
+Scrape the oldest blog articles from BeyondChats and store them in a database with CRUD access.
 
-**Workflow:**
-1. Fetch pending (not yet updated) articles from backend APIs
+**Implementation**
+- Navigated to the last page of the BeyondChats blogs section using Puppeteer
+- Scraped the 5 oldest blog articles
+- Extracted:
+  - title
+  - slug
+  - original HTML content
+- Stored articles in MongoDB
+- Built REST APIs to:
+  - create articles
+  - fetch all articles
+  - fetch article by ID
+  - update articles
+
+---
+
+### 🤖 Phase 2 – AI Article Updater (Core Intelligence)
+
+**Objective**  
+Enhance existing blog articles using AI and competitive analysis.
+
+**Process Flow**
+1. Fetch unprocessed articles from backend APIs
 2. Search the article title on DuckDuckGo
-3. Select the top 2 valid reference articles
-4. Scrape main content from those references
-5. Use Gemini AI to rewrite and improve the original article
-6. Preserve structure, readability, and originality
-7. Add a references section for transparency
-8. Save the updated article back via APIs
+3. Select the top 2 valid external reference articles
+4. Scrape the main content of those references
+5. Use Gemini AI to:
+   - improve structure and clarity
+   - enhance depth and readability
+   - preserve originality (no plagiarism)
+6. Publish the updated article back to the backend
+7. Store reference links for transparency
 
-**Key focus:**
-- No plagiarism
-- Better structure and clarity
-- SEO-friendly formatting
-- Proper attribution
+**Key Design Choice**
+- AI is used as an **editor**, not a generator
+- No copying of external content
+- References are cited at the end of updated articles
 
 ---
 
-## 🔹 Phase 3: Frontend Visualization
+### 🎨 Phase 3 – Frontend UI (Visualization Layer)
 
-**Objective:**  
-Provide a clean, intuitive UI to view original and AI-updated articles.
+**Objective**  
+Create a responsive, professional interface to explore and compare articles.
 
-**Features:**
-- Animated hero section with subtle gradient motion
-- Card-based layout for articles
-- Status indication (Original / AI Updated)
-- Modal views for:
-  - Original article
-  - Updated article
+**Features**
+- Animated hero section
+- Article cards with update status
+- Z-axis modal overlays (true overlays using portals)
+- View modes:
+  - Original blog
+  - AI-updated blog
   - Side-by-side comparison
-- Hover interactions and depth effects for better UX
-
-**Design philosophy:**
-- Minimal but polished
-- Focus on readability
-- Clear value demonstration
-- No unnecessary animations
+- Scroll-safe modals and clean UX
+- Responsive grid layout
 
 ---
 
-## ▶️ How to Run Locally
+## 📸 Screenshots (Add These)
+
+> 📌 **You must add screenshots here**  
+Create a folder called `/screenshots` in the root of the repo.
+
+### Homepage
+![Homepage](./screenshots/home.png)
+
+### View Updated Blog
+![Updated Blog](./screenshots/updated.png)
+
+### Compare View
+![Compare View](./screenshots/compare.png)
+
+*(Screenshots help reviewers verify functionality quickly and carry strong weight.)*
+
+---
+
+## 🧪 Running the Project Locally
 
 ### Backend
 ```bash
