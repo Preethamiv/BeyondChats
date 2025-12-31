@@ -126,7 +126,7 @@ Create a responsive, professional interface to explore and compare articles.
 
 The project is organized into clear backend, frontend, and automation layers for scalability and maintainability.
 
-![Folder Structure](assets/folder-structure.png)
+![Folder Structure](assets/FolderStructure.png)
 
 ### Structure Overview
 - **backend/** – Express server, MongoDB models, APIs, and scraping logic  
@@ -140,6 +140,11 @@ The project is organized into clear backend, frontend, and automation layers for
 ## 📸 Screenshots
 
 Below are key views showcasing how the system presents and compares blog content transparently.
+
+### 🏠 Homepage View
+Displays the main landing page with the list of articles, their update status, and entry points to view or compare blogs.
+
+![Homepage View](assets/HomePage.png)
 
 ### 📰 Original Blog View
 Displays the scraped blog article in its original form as fetched from the source.
