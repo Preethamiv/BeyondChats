@@ -191,6 +191,8 @@ cd ai
 npm install
 node index
 
+---
+
 ## 🚀 Future Improvements
 
 - Deploy backend and frontend using Docker and cloud hosting (Vercel / AWS)
