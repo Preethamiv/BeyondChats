@@ -46,22 +46,44 @@ export default function ArticleCard({ article }) {
         </div>
       </div>
 
+      {/* ---------- MODAL ---------- */}
       {view && (
         <Modal onClose={() => setView(null)}>
-          {view === "original" && (
-            <div dangerouslySetInnerHTML={{ __html: article.originalContent }} />
-          )}
+          {/* Close button INSIDE modal */}
+          <button
+            className="modal-close"
+            onClick={() => setView(null)}
+          >
+            ✕ Close
+          </button>
 
-          {view === "updated" && (
-            <div dangerouslySetInnerHTML={{ __html: article.updatedContent }} />
-          )}
+          {/* Scroll-safe container */}
+          <div className="modal-content">
+            {view === "original" && (
+              <div
+                className="article-html"
+                dangerouslySetInnerHTML={{
+                  __html: article.originalContent,
+                }}
+              />
+            )}
 
-          {view === "compare" && (
-            <CompareView
-              original={article.originalContent}
-              updated={article.updatedContent}
-            />
-          )}
+            {view === "updated" && (
+              <div
+                className="article-html"
+                dangerouslySetInnerHTML={{
+                  __html: article.updatedContent,
+                }}
+              />
+            )}
+
+            {view === "compare" && (
+              <CompareView
+                original={article.originalContent}
+                updated={article.updatedContent}
+              />
+            )}
+          </div>
         </Modal>
       )}
     </>
