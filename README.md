@@ -29,6 +29,8 @@ This project demonstrates how AI can be used to **revive and enhance existing bl
 
 ![Architecture Diagram](assets/architecture.png)
 
+---
+
 ## 🛠️ Tech Stack
 
 ### Backend
@@ -120,21 +122,43 @@ Create a responsive, professional interface to explore and compare articles.
 
 ---
 
-## 📸 Screenshots (Add These)
+## 📸 Screenshots
 
-> 📌 **You must add screenshots here**  
-Create a folder called `/screenshots` in the root of the repo.
+Below are key views showcasing how the system presents and compares blog content transparently.
 
-### Homepage
-![Homepage](./screenshots/home.png)
+### 📰 Original Blog View
+Displays the scraped blog article in its original form as fetched from the source.
 
-### View Updated Blog
-![Updated Blog](./screenshots/updated.png)
+![Original Blog](./screenshots/Original.png)
 
-### Compare View
-![Compare View](./screenshots/compare.png)
+---
 
-*(Screenshots help reviewers verify functionality quickly and carry strong weight.)*
+### 🤖 AI-Updated Blog View
+Shows the AI-enhanced version of the blog with improved structure, clarity, and depth, while preserving originality.
+
+![AI Updated Blog](./screenshots/Ai-Updated.png)
+
+---
+
+### 🔍 Side-by-Side Comparison
+Allows direct comparison between the original and AI-updated versions for transparency and evaluation.
+
+![Compare View](./screenshots/Compare.png)
+
+---
+
+## 📂 Project Folder Structure
+
+The project is organized into clear backend, frontend, and automation layers for scalability and maintainability.
+
+![Folder Structure](./screenshots/FolderStructure.png)
+
+### Structure Overview
+- **backend/** – Express server, MongoDB models, APIs, and scraping logic  
+- **ai/** – AI article updater pipeline (search, scrape, Gemini rewrite)  
+- **frontend/** – React (Vite) application with modern UI and comparison views  
+- **screenshots/** – Project screenshots used in documentation  
+- **assets/** – Architecture diagrams and static resources  
 
 ---
 
