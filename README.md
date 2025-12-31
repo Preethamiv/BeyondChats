@@ -122,6 +122,21 @@ Create a responsive, professional interface to explore and compare articles.
 
 ---
 
+## 📂 Folder Structure
+
+The project is organized into clear backend, frontend, and automation layers for scalability and maintainability.
+
+![Folder Structure](./screenshots/folder-structure.png)
+
+### Structure Overview
+- **backend/** – Express server, MongoDB models, APIs, and scraping logic  
+- **ai/** – AI article updater pipeline (search, scrape, Gemini rewrite)  
+- **frontend/** – React (Vite) application with modern UI and comparison views  
+- **screenshots/** – Project screenshots used in documentation  
+- **assets/** – Architecture diagrams and static resources  
+
+---
+
 ## 📸 Screenshots
 
 Below are key views showcasing how the system presents and compares blog content transparently.
@@ -169,3 +184,5 @@ The project is organized into clear backend, frontend, and automation layers for
 cd backend
 npm install
 npm run dev
+
+
