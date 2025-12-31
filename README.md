@@ -78,6 +78,10 @@ Scrape the oldest blog articles from BeyondChats and store them in a database wi
   - fetch article by ID
   - update articles
 
+**Why Puppeteer?**  
+The BeyondChats blog pages rely on client-side rendering and pagination, which makes
+static HTTP scraping unreliable. Puppeteer was chosen to accurately render the DOM,
+navigate pages like a real browser, and extract consistent HTML content.
 ---
 
 ### 🤖 Phase 2 – AI Article Updater (Core Intelligence)
@@ -177,4 +181,26 @@ cd backend
 npm install
 npm run dev
 
+```md
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
 
+```md
+### AI Article Updater
+```bash
+cd ai
+npm install
+node index
+
+```md
+## 🚀 Future Improvements
+
+- Deploy backend and frontend using Docker and cloud hosting
+- Add background job queues for AI article processing
+- Introduce plagiarism and semantic similarity checks
+- Track SEO metrics before and after AI updates
+- Add admin approval workflows for AI-edited content
+- Extend support for multilingual blog enhancement
