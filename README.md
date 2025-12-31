@@ -27,7 +27,7 @@ This project demonstrates how AI can be used to **revive and enhance existing bl
 
 ## 🧩 Architecture Overview
 
-![Architecture Diagram](assets/architecture.png)
+![Architecture Diagram](assets/aarchitecture.png)
 
 ---
 
@@ -176,6 +176,8 @@ The project is organized into clear backend, frontend, and automation layers for
 - **assets/** – Architecture diagrams and static resources  
 
 ---
+
+
 
 ## 🧪 Running the Project Locally
 
