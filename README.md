@@ -126,7 +126,7 @@ Create a responsive, professional interface to explore and compare articles.
 
 The project is organized into clear backend, frontend, and automation layers for scalability and maintainability.
 
-![Folder Structure](./screenshots/folder-structure.png)
+![Folder Structure](assets/folder-structure.png)
 
 ### Structure Overview
 - **backend/** – Express server, MongoDB models, APIs, and scraping logic  
@@ -144,36 +144,21 @@ Below are key views showcasing how the system presents and compares blog content
 ### 📰 Original Blog View
 Displays the scraped blog article in its original form as fetched from the source.
 
-![Original Blog](./screenshots/Original.png)
+![Original Blog](assets/Original.png)
 
 ---
 
 ### 🤖 AI-Updated Blog View
 Shows the AI-enhanced version of the blog with improved structure, clarity, and depth, while preserving originality.
 
-![AI Updated Blog](./screenshots/Ai-Updated.png)
+![AI Updated Blog](assets/Ai-Updated.png)
 
 ---
 
 ### 🔍 Side-by-Side Comparison
 Allows direct comparison between the original and AI-updated versions for transparency and evaluation.
 
-![Compare View](./screenshots/Compared.png)
-
----
-
-## 📂 Project Folder Structure
-
-The project is organized into clear backend, frontend, and automation layers for scalability and maintainability.
-
-![Folder Structure](./screenshots/FolderStructure.png)
-
-### Structure Overview
-- **backend/** – Express server, MongoDB models, APIs, and scraping logic  
-- **ai/** – AI article updater pipeline (search, scrape, Gemini rewrite)  
-- **frontend/** – React (Vite) application with modern UI and comparison views  
-- **screenshots/** – Project screenshots used in documentation  
-- **assets/** – Architecture diagrams and static resources  
+![Compare View](assets/Compared.png)
 
 ---
 
