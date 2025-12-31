@@ -158,7 +158,7 @@ Shows the AI-enhanced version of the blog with improved structure, clarity, and 
 ### 🔍 Side-by-Side Comparison
 Allows direct comparison between the original and AI-updated versions for transparency and evaluation.
 
-![Compare View](./screenshots/Compare.png)
+![Compare View](./screenshots/Compared.png)
 
 ---
 
